@@ -1,0 +1,277 @@
+#include<stdio.h>
+#include<math.h>
+#include<GL/glut.h>
+GLint win=0;
+GLint r=0;
+//GLint v=0;
+GLfloat i;
+GLfloat x=1;
+GLfloat teta=0;
+GLfloat t=0;
+float a=0.2,b=0.2,c=0.2;
+void GoMenu(int);
+
+void createmenu(){
+		 //glLoadIdentity();
+	 glutCreateMenu(GoMenu);
+	 glutAddMenuEntry("Preparation of soil",1);
+	 glutAddMenuEntry("sowing",2);
+	 glutAddMenuEntry("adding manure and fertilizers",3);
+	 glutAddMenuEntry("Irrigation",4);
+	 glutAddMenuEntry("Harvesting and Storage",5);
+	 glutAddMenuEntry("Exit",6);
+	  
+	   glutAttachMenu(GLUT_RIGHT_BUTTON);
+	   glutPostRedisplay();
+
+
+}
+
+void GoMenu(int value){
+	switch (value)
+	{
+	case 1:{r=1;
+		break;}
+	case 2:break;
+	case 6:{glutDestroyWindow (win);
+							exit(0);
+							break;}
+	}
+	glutPostRedisplay();
+	
+		
+	
+
+
+}
+void keyboard(int key,int x,int y)
+{
+    switch(key)
+    {
+            case GLUT_KEY_UP:{
+				
+								
+                               break;
+                            }
+			case GLUT_KEY_DOWN:{
+								
+								break;
+							   
+							   }
+			case GLUT_KEY_END: {
+				
+							glutDestroyWindow (win);
+							exit(0);
+							break;
+							  }
+    }
+
+
+	 
+}
+void keyboard1(unsigned char key, int x, int y)
+{
+	if(key=='1'){
+		r=1;
+		glLoadIdentity();
+		
+	}
+	if(key=='S'){
+		if(a>0.2){
+			a-=0.1;
+			b-=0.1;
+			c-=0.1;
+		}
+
+	}
+
+}
+
+
+
+
+void renderBitmapStringb(float x, float y, const char *string)
+{
+    const char *c;
+    glRasterPos2f(x, y);
+    for (c=string; *c != '\0'; c++) 
+	{
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+    }
+} 
+void renderBitmapStrings(float x, float y, const char *string)
+{
+    const char *c;
+    glRasterPos2f(x, y);
+    for (c=string; *c != '\0'; c++) 
+	{
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+    }
+} 
+void renderBitmapStringl(float x, float y, const char *string)
+{
+    const char *c;
+    glRasterPos2f(x, y);
+    for (c=string; *c != '\0'; c++) 
+	{
+        glutBitmapCharacter(GLUT_BITMAP_9_BY_15, *c);
+    }
+} 
+void DrawCircle(float cx, float cy, float r, int num_segments)
+{
+	glMatrixMode(GL_MODELVIEW);
+	int ii;
+	float theta, x, y, i;
+	glBegin(GL_POLYGON);
+	for(ii = 0; ii < num_segments; ii++)
+	{
+		i = (float)ii/(float)num_segments;
+		theta = 2.0f*3.1415926f*i;
+		x = r * cosf(theta);
+		y = r * sinf(theta);
+		glVertex2f(x + cx, y + cy);
+     }
+	glEnd();
+	glFlush();
+}
+
+/*
+		glColor3f(0.9,0.0,0.0);  
+		glBegin(GL_POLYGON);
+		glVertex2f(780.0+p,190.0);
+		glVertex2f(780.0+p,250.0);             // car rectangle part
+		glVertex2f(826.5+p,250.0);
+		glVertex2f(852.0+p,320.0);
+		glVertex2f(925.0+p,320.0);
+		glVertex2f(950.0+p,250.0);
+		glVertex2f(975.0+p,250.0);
+		glVertex2f(975.0+p,190.0);
+		glVertex2f(780.0+p,190.0);
+		glEnd();
+		*/
+void scene(){
+	if(r==0){
+		
+		glColor3f(1.0,1.0,1.0); 
+		renderBitmapStringb(-525,900,"SAHYADRI COLLEGE OF ENGINEERING AND MANAGEMENT"); 
+		renderBitmapStringb(-210,800,"ADYAR MANGALURU"); 
+		glColor3f(0.0,1.0,0.0);  
+		renderBitmapStrings(-400,600,"DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING"); 
+		renderBitmapStrings(-300,500,"COMPUTER GRAPHICS AND VISUALIZATION"); 
+		glColor3f(1.0,1.0,1.0);
+		renderBitmapStringb(-150,300,"MINI PROJECT ON"); 
+		glColor3f(1.0,0.0,0.0);
+		renderBitmapStrings(-170,200,"PHASES OF AGRICULTURE"); 
+		glColor3f(1.0,1.0,1.0);
+		renderBitmapStringb(-980,-300,"TEAM MEMBERS"); 
+		renderBitmapStringb(600,-300,"PROJECT GUIDED BY"); 
+		glColor3f(0.0,0.0,1.0);
+		renderBitmapStrings(-980,-400,"RANI ADHADUK  4SF15CS119");            
+		renderBitmapStrings(-980,-500,"NEHA POOJARI  4SF15CS090"); 
+		renderBitmapStrings(600,-400,"Dr.PUSHPALATHA K");                       
+		renderBitmapStrings(600,-500,"ASSOCIATE PROFESSOR");
+		renderBitmapStrings(600,-600,"CHAITRA ARCHARIYA ");                        
+		renderBitmapStrings(600,-700,"ASSISTANCE PROFESSOR");
+		renderBitmapStrings(600,-800,"Dept of CSE");
+		renderBitmapStrings(-980,-600,"Dept of CSE SEC B");
+	
+	}else if(r==1){
+
+
+			glColor3f(0.9,0.0,0.0);  
+		glBegin(GL_POLYGON);
+		glVertex3f(500.0,-800.0,-500.0);
+		glVertex3f(500.0,-500.0,500.0);             // car rectangle part
+		glVertex3f(-500.0,-500.0,500.0);
+		glVertex3f(-500.0,-800.0,-500.0);
+		glEnd();
+
+
+
+
+	}
+}
+void myInit()
+{
+     glClearColor(0.0, 0.0, 0.0, 0.0);
+	  glColor3f(0.0, 0.0, 0.0);
+	  glOrtho(-1000,1000,-1000,1000,-1000,1000);
+
+     glMatrixMode(GL_PROJECTION);
+     glLoadIdentity();
+    
+     glMatrixMode(GL_MODELVIEW);
+}
+void display()
+{
+     	glClear(GL_COLOR_BUFFER_BIT);
+		
+		
+		if(r==0)
+		{
+			while(a<=1.0)
+		{
+			glPushMatrix();
+			glScalef(a,b,c);
+			scene();
+			glPopMatrix();
+			a=a+0.01;
+			b=b+0.01;
+			c=c+0.01;
+			glFlush();
+			glutPostRedisplay();
+			glutSwapBuffers();
+			glFlush();
+		}                         // end of while loop
+			scene();
+			
+		}else if(r==1){
+
+				
+	 
+			 
+				glPushMatrix();
+				scene();
+			glRotatef(teta,0,1,0);
+			scene();
+			glPopMatrix();
+			teta+=0.01;
+			glFlush();
+			glutPostRedisplay();
+			glutSwapBuffers();
+			
+			
+
+	
+				scene();
+		}
+		glutPostRedisplay();
+		glFlush();
+		glutSwapBuffers();
+		
+     	
+}
+int main(int argc, char **argv)
+{
+   	 glutInit(&argc, argv);
+   	 glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);	
+   	 glutInitWindowSize(500, 500);
+  	 glutInitWindowPosition(0, 0);
+   	 win=glutCreateWindow("PHASES OF AGRICULTURE");
+	 glutFullScreen(); 
+	 myInit();
+
+	 createmenu();
+	 
+	
+	glutDisplayFunc(display);
+
+	
+	 
+   	
+	// glutSpecialFunc(keyboard);
+	// glutKeyboardFunc(keyboard1);
+   	 glutIdleFunc(display);
+   	 glutMainLoop();
+
+}
